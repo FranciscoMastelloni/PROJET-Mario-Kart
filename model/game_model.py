@@ -1,3 +1,5 @@
+# Kart-Engine v2.3
+"""Etat du jeu, circuit et voitures."""
 from constants import GameState, GRID_ROWS, GRID_COLS
 from model.car import Car
 from model.circuit import Circuit
@@ -5,22 +7,31 @@ from model.road_tile import RoadTile
 
 
 class GameModel:
+    """Contient les donnees du jeu ; aucune gestion directe du clavier."""
 
     def __init__(self):
-        self.state: str = GameState.MENU
-        self.circuit: Circuit | None = None
-        self.car: Car | None = None
+        self.state = GameState.MENU
+        self.circuit = None
+        self.cars = []
 
     def load_circuit(self) -> None:
-        grid = [[RoadTile(col=col_idx, row=row_idx)
-                for row_idx in range(GRID_COLS)] for col_idx in range(GRID_ROWS)]
-        self.circuit = Circuit(grid=grid)
-        self.spawn_car()
+        # Le circuit original est une grille uniforme de cases de route.
+        grid = [
+            [RoadTile(col=col, row=row) for col in range(GRID_COLS)]
+            for row in range(GRID_ROWS)
+        ]
+        self.circuit = Circuit(grid)
+        self.spawn_cars()
 
-    def spawn_car(self) -> None:
-        self.car = Car(7, 1)
+    def spawn_cars(self) -> None:
+        """Place les deux joueurs dans des colonnes differentes."""
+        self.cars = [
+            Car(start_col=5, start_row=9, color=(230, 70, 70)),
+            Car(start_col=10, start_row=9, color=(65, 140, 245)),
+        ]
 
     def update(self) -> None:
         if self.state != GameState.RACING or self.circuit is None:
             return
-        self.car.update_position()
+        for car in self.cars:
+            car.update_position()
