@@ -72,13 +72,7 @@ Les tests automatises verifient la logique numerique de la physique. Le
 fonctionnement de la fenetre et des touches doit egalement etre valide
 manuellement sur un ordinateur possedant pygame.
 
-## Declaration d'utilisation de l'IA
 
-ChatGPT a ete utilise pour analyser le code de depart, aider a concevoir la
-dynamique des voitures, generer et adapter des portions de code Python, ainsi
-que preparer des commentaires, de la documentation et des tests de logique.
-Les choix de modelisation, le code et les sorties du programme doivent etre
-relus, testes et compris par l'etudiant avant le rendu.
 
 ## Fonctionnalites non incluses
 
